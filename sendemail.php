@@ -15,7 +15,6 @@
 
     $body = 'Name: ' . $name . "\n\n" . 'Email: ' . $email . "\n\n" . 'Subject: ' . $subject . "\n\n" . 'Message: ' . $message;
 
-<<<<<<< HEAD
     if (mail($email_to, $subject, $body, 'From: <'.$email_from.'>')){
         $status = array(
         'type'=>'success',
@@ -30,9 +29,4 @@
         echo json_encode($status);
     }
 
-=======
-    $success = @mail($email_to, $subject, $body, 'From: <'.$email_from.'>');
-
-    echo json_encode($status);
->>>>>>> 44ed49b615062cfef386440df150123238f55325
     die;
