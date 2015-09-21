@@ -15,7 +15,18 @@
 
     $body = 'Name: ' . $name . "\n\n" . 'Email: ' . $email . "\n\n" . 'Subject: ' . $subject . "\n\n" . 'Message: ' . $message;
 
-    $success = @mail($email_to, $subject, $body, 'From: <'.$email_from.'>');
+    if (mail($email_to, $subject, $body, 'From: <'.$email_from.'>')){
+        $status = array(
+        'type'=>'success',
+        'message'=>'Email sent!'
+        );
+        echo json_encode($status);
+    }else{
+        $status = array(
+        'type'=>'error',
+        'message'=>'Email could not be sent! Please try again'
+        );
+        echo json_encode($status);
+    }
 
-    echo json_encode($status);
     die;
