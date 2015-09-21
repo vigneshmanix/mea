@@ -39,9 +39,23 @@ jQuery(function($) {
 	//contact form
 	var form = $('.contact-form');
 	form.submit(function () {
+        var formData= {
+            'name'              : $('input[name=firstname]').val()+" "+$('input[name=lastname]').val(),
+            'email'             : $('input[name=email]').val(),
+            'message'             : $('textarea[name=message]').val()
+        }
+        
 		$this = $(this);
-		$.post($(this).attr('action'), function(data) {
+		$.post($(this).attr('action'),formData, function(data) {
 			$this.prev().text(data.message).fadeIn().delay(3000).fadeOut();
+            $("input, textarea").val("");
+            if (data.type=="error"){
+                $this.prev().addClass("alert-danger");
+                $this.prev().removeClass("alert-success");
+            }else{
+                 $this.prev().addClass("alert-success");
+                $this.prev().removeClass("alert-danger");
+            }
 		},'json');
 		return false;
 	});
